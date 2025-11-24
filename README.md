@@ -24,7 +24,7 @@
 ## Базы данных
 
 - users (id, username,)
-- groups (id, groupname)
+- groups (id, groupname, users)
 - products (id, productname, quantity, image, message)
 
 ## Структура проекта
