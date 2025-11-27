@@ -23,9 +23,9 @@
 
 ## Базы данных
 
-- users (id, username,)
-- groups (id, groupname, users)
-- products (id, productname, quantity, image, message)
+- users (id, username, password)
+- groups ()
+- products ()
 
 ## Структура проекта
 
@@ -44,18 +44,17 @@
    │   └── package.json
    ├── web/                    # React веб-приложение
    │   ├── src/
+   │   │   ├── app/
+   │   │   ├── assets/
    │   │   ├── components/
    │   │   ├── pages/
-   │   │   ├── hooks/
+   |   │   │   ├──MainPage
+   |   │   │   └──RegistrationPage 
    │   │   └── utils/
    │   └── package.json
    ├── backend/                # Node.js сервер
    │   ├── src/
-   │   │   ├── controllers/    # Логика обработки запросов
-   │   │   ├── routes/         # Маршруты API
-   │   │   ├── middleware/     # Промежуточное ПО
-   │   │   ├── utils/          # Вспомогательные функции
-   │   │   └── config/         # Конфигурации
+   │   │   └── app.js         # 
    │   ├── prisma/            # Схема и миграции БД
    │   └── package.json
    └── docker-compose.yml  
