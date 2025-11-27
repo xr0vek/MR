@@ -4,7 +4,7 @@ import { Section } from "../components/Section"
 import { Container } from "../components/Container"
 
 export const MainPage = () => {
-   const {status, data} = useQuery({
+   const {status, data, refetch} = useQuery({
       queryKey: ['table'],
       queryFn: () => fetch('http://localhost:3000/users').then(res => res.json())
    }, queryClient)
