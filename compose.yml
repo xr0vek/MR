@@ -1,0 +1,24 @@
+services:
+  web:
+    build: ./web # Указывает на директорию с Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./web:/app
+      - ./web/public:/app/public
+      - /app/node_modules
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - VITE_WATCH_POLLING=true
+  back:
+    build: ./backend # Указывает на директорию с Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true

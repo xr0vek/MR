@@ -1,3 +1,9 @@
+## Запуск проекта
+- Установить Docker версии не меньше 28
+- запуск: docker compose up
+- отсановка: docker compose down
+- остановить и удалить images: docker compose down --rmi all
+
 ## Функционал проекта
 
 - Авторизация и регистрация пользователей
@@ -5,23 +11,25 @@
 
 ## API Endpoints
 
-- POST /user/ регистрация нового пользователя
-- GET /user/ проверка авторизации на сервере
-- PATCH /user/ обновление данных о пользователе
+- POST /user/register регистрация нового пользователя
+- GET /user/profile проверка авторизации на сервере
+- PATCH /user/update обновление данных о пользователе
 
-- POST /group/ создание группы пользователей
+- POST /group/register создание группы пользователей
+- DELETE /group/delete удаление группы пользователей
 
-- POST /group/join создать запрос для вступления в группу
+- POST /group/join-group приглашение для вступления в группу
 
-- GET /group/join запрос для пользователя на вступление в группу
+- GET /group/request-group запрос для пользователя на вступление в группу
 
 - POST /group/aprove одобрения на вступление
 - POST /group/reject отклонение запроса
 
-- POST /products/ добавление продукта в лист закупок
+- POST /products/add добавление продукта в лист закупок
+- DELETE /products/delete добавление продукта в лист закупок
 - GET /products/ олучение списка из листа закупок
 
-## Базы данных
+## Схема таблиц
 
 - users (id, username, password)
 - groups ()
@@ -55,6 +63,5 @@
    ├── backend/                # Node.js сервер
    │   ├── src/
    │   │   └── app.js         # 
-   │   ├── prisma/            # Схема и миграции БД
    │   └── package.json
-   └── docker-compose.yml  
+   └── compose.yml  

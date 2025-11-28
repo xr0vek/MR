@@ -7,13 +7,13 @@ WORKDIR /app
 COPY package.json .
 
 # Install dependencies
-RUN npm install 
+RUN npm install
 
 # Copy the rest of your application code
 COPY . .
 
 # Expose the port your application listens on (e.g., 3000 for many Node.js apps)
-EXPOSE 5173
+EXPOSE 3000
 
 # Command to run your application in development mode
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "5173"]
+CMD ["npm", "run", "dev"]
