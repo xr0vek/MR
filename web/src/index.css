@@ -1,0 +1,16 @@
+@import 'tailwindcss';
+
+@layer base {
+    button {
+        cursor: pointer;
+    }
+    #root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    #root main {
+        flex-grow: 2;
+    }
+}
