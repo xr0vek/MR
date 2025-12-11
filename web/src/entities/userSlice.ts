@@ -1,21 +1,42 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../app/redux/store";
 import { userApi } from "../app/api/userApi";
+import type { LoginUser, RegisterUser } from "../app/api/userModels";
 
 export interface InitialState {
-    name: string | null,
-    email: string | null,
+    user:{
+        name: string,
+        email: string,
+        id: string
+    } | null
     error: string | null,
 }
 
 const initialState: InitialState = {
-    name: null,
-    email: null,
+    user: null,
     error: null
 }
 
-export const loginUser = createAsyncThunk("user/register", (user: {name: string, email: string, password: string}) => {
+export const fetchUser = createAsyncThunk('user/fetch', () => {
+    return userApi.fetch()
+})
+
+export const loginUser = createAsyncThunk("user/login", ({data: user, onSuccess}: {data: LoginUser, onSuccess: () => void}) => {
+    return userApi.login(user).then(res => {
+        onSuccess()
+        return res
+    })
+})
+
+export const registerUser = createAsyncThunk("user/register", (user: RegisterUser) => {
     userApi.register(user)
+})
+
+export const logoutUser = createAsyncThunk('user/logout', ({onSuccess}: {onSuccess: () => void}) => {
+    return userApi.logout().then(res => {
+        onSuccess()
+        return res
+    })
 })
 
 export const userSlice = createSlice({
@@ -25,8 +46,18 @@ export const userSlice = createSlice({
 
     },
     extraReducers: (builder) => {
-        builder.addCase(loginUser.fulfilled, (_, action) => {
+        builder.addCase(loginUser.fulfilled, (state, action) => {
+            state.user ={
+                name: action.payload.name,
+                id: action.payload.id,
+                email: action.payload.email
+            }
+        }),
+        builder.addCase(fetchUser.fulfilled, (state, action) => {
             console.log(action.payload)
+        }),
+        builder.addCase(logoutUser.fulfilled, (state, action) => {
+            return initialState
         })
     }
 })

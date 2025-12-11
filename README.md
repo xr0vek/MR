@@ -61,8 +61,22 @@
    |   │   │   └──RegistrationPage 
    │   │   └── utils/
    │   └── package.json
-   ├── backend/                # Node.js сервер
+   ├── backend/                      # Node.js сервер
    │   ├── src/
-   │   │   └── app.js         # 
+   │   │   ├── models                # Модели данных
+   |   │   │   ├──user.js
+   |   │   │   └──post.js    
+   │   │   ├── controllers           # Логика обработки запроса
+   │   │   ├── routes                # Маршруты
+   |   │   │   ├──authrouter.js
+   |   │   │   └──postRouter .js   
+   │   │   ├── midleware             # Промежуточное ПО
+   |   │   │   ├──auth.js
+   |   │   │   └──errorHandler.js    
+   │   │   ├── config                # Настройка подключения к базе данных  
+   |   │   │   └──dataBase.js          
+   │   │   ├── validators
+   |   │   │   └──validators.js      # Вадидация данных данных  
+   │   │   └── app.js                #  Точка входа
    │   └── package.json
    └── compose.yml  

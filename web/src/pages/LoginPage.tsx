@@ -4,7 +4,9 @@ import { Section } from "../components/Section"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { LoginInputsSchema, type LoginInputs } from "./LoginPageModels"
 import { Button } from "../components/Button"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useAppDispatch } from "../app/redux/hooks"
+import { loginUser } from "../entities/userSlice"
 
 export const LoginPage = () => {
      type Inputs = {
@@ -22,12 +24,21 @@ export const LoginPage = () => {
         type: 'password'
     }]
 
-    const {handleSubmit, formState, register} = useForm<LoginInputs>({
+    const navigate = useNavigate()
+
+    const dispatch = useAppDispatch()
+
+    const {handleSubmit, formState, register, reset} = useForm<LoginInputs>({
         resolver: zodResolver(LoginInputsSchema)
     })
 
+    const onSuccess = () => {
+        navigate('/')
+        reset()
+    }
+
     const onSubmit = (data: LoginInputs) => {
-        console.log(data)
+        dispatch(loginUser({data, onSuccess}))
     }
 
     return <Section>

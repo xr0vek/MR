@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { userApi } from "../app/api/userApi";
 import { queryClient } from "../queryClient";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const RegistrationPage = () => {
     type Inputs = {
@@ -32,6 +32,7 @@ export const RegistrationPage = () => {
 
     const {mutate} = useMutation({
         mutationFn: userApi.register,
+        mutationKey: ['user', 'register'],
         onSuccess: () => {
             reset(),
             navigate('/login')
@@ -48,7 +49,7 @@ export const RegistrationPage = () => {
 
     return <Section>
         <Container className="flex flex-col items-center justify-center mb24 p-6">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3 w-md p-6 bg-white rounded-xl">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3 mb-6 w-md p-6 bg-white rounded-xl">
                 {inputs.map((input, index) => (
                 <label htmlFor={input.label} key={index} className="w-full">
                     <input type={input.type} placeholder={input.placeholder} className="w-full border-zinc-300 rounded border-solid border-1 outline-none p-3" {...register(input.label)}/>
@@ -57,6 +58,7 @@ export const RegistrationPage = () => {
                 ))}
                 <Button>Зарегистрироаться</Button>
             </form>
+            <Link to={'/login'}>Авторизироватся</Link>
         </Container>
     </Section>
 }
